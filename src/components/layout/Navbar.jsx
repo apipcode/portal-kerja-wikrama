@@ -44,9 +44,17 @@ const Navbar = () => {
               </a>
             ))}
             
-            <button onClick={toggleTheme} className="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
+            <div className="flex items-center space-x-2">
+              <button 
+                onClick={() => alert('Fitur Multi-Language (EN/ID) segera hadir!')} 
+                className="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700"
+              >
+                ID
+              </button>
+              <button onClick={toggleTheme} className="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
+            </div>
 
             <div className="flex items-center space-x-4 ml-4">
               {user ? (
