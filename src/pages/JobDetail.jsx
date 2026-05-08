@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { MOCK_JOBS } from '../components/sections/JobBoard';
 import Button from '../components/common/Button';
-import Badge from '../common/Badge';
+import Badge from '../components/common/Badge';
 import { ArrowLeft, Building2, MapPin, Clock, DollarSign, BookmarkPlus, Loader2 } from 'lucide-react';
 
 const JobDetail = () => {
