@@ -17,7 +17,7 @@ const Login = () => {
   // Safe auth extraction to prevent blank screen
   const auth = useAuth();
   
-  // Redirect if already logged in
+  // Redirect if already logged in  
   React.useEffect(() => {
     if (auth && auth.user) {
       navigate('/profile');
