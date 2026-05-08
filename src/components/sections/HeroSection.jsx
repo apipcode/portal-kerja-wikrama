@@ -11,11 +11,13 @@ const HeroSection = ({ onSearch }) => {
     if (onSearch) {
       // Pass the combined query or just the main query
       onSearch(query);
-      // Optional: scroll to jobs section
-      const jobsSection = document.getElementById('lowongan');
-      if (jobsSection) {
-        jobsSection.scrollIntoView({ behavior: 'smooth' });
-      }
+      // Add a slight delay to ensure the UI is ready
+      setTimeout(() => {
+        const jobsSection = document.getElementById('lowongan');
+        if (jobsSection) {
+          jobsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     }
   };
 
