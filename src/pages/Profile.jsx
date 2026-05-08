@@ -89,40 +89,51 @@ const Profile = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 dark:bg-slate-900 transition-colors">
       <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
         {/* Header Cover */}
-        <div className="bg-gradient-to-r from-primary to-primary-light h-40 relative">
-          <div className="absolute -bottom-16 left-8 flex items-end gap-6">
-            <div className="relative">
-              <img 
-                src={formData.avatar_url || `https://ui-avatars.com/api/?name=${formData.full_name}&background=1e3a8a&color=fff`} 
-                alt="Profile" 
-                className="w-32 h-32 rounded-full border-4 border-white dark:border-slate-800 object-cover bg-white shadow-sm"
-              />
-              <button className="absolute bottom-2 right-0 p-2 bg-secondary text-primary-dark rounded-full shadow-sm hover:scale-105 transition-transform">
-                <Camera size={16} />
-              </button>
-            </div>
-            <div className="mb-4">
-              <div className="flex items-center gap-2">
-                <h1 className="text-3xl font-bold text-slate-900 dark:text-white drop-shadow-md">{profile?.full_name || 'User'}</h1>
-                {profile?.verified_status && (
-                  <div className="text-blue-500 bg-white rounded-full" title="Akun Terverifikasi BKK">
-                    <BadgeCheck size={28} />
-                  </div>
-                )}
-              </div>
-              <p className="text-white/90 drop-shadow capitalize font-medium">{profile?.role || 'Member'} • SMK Wikrama Bogor</p>
-            </div>
-          </div>
-          <div className="absolute bottom-4 right-6 hidden md:flex gap-3">
-            <Button variant="secondary" className="px-4 py-2 text-sm bg-white text-slate-700 hover:bg-slate-50 border-0">
+        <div className="bg-gradient-to-r from-primary to-primary-light h-48 relative rounded-t-3xl">
+          <div className="absolute top-4 right-6 hidden md:flex gap-3">
+            <Button variant="secondary" className="px-4 py-2 text-sm bg-white text-slate-700 hover:bg-slate-50 border-0 shadow-sm">
               <Printer className="w-4 h-4 mr-2" />
               Cetak CV PDF
             </Button>
           </div>
         </div>
 
+        {/* Profile Info Section */}
+        <div className="px-8 pb-8 relative border-b border-slate-100 dark:border-slate-700">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-6 -mt-16 mb-2 relative z-10">
+            <div className="relative inline-block">
+              <img 
+                src={formData.avatar_url || `https://ui-avatars.com/api/?name=${profile?.full_name?.replace(' ', '+') || 'User'}&background=1e3a8a&color=fff`} 
+                alt="Profile" 
+                className="w-32 h-32 rounded-full border-4 border-white dark:border-slate-800 object-cover bg-white shadow-md"
+              />
+              <button className="absolute bottom-2 right-0 p-2 bg-secondary text-primary-dark rounded-full shadow-sm hover:scale-105 transition-transform border-2 border-white dark:border-slate-800">
+                <Camera size={16} />
+              </button>
+            </div>
+            
+            <div className="flex-1 pb-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{profile?.full_name || 'User'}</h1>
+                    {profile?.verified_status && (
+                      <div className="text-blue-500" title="Akun Terverifikasi BKK">
+                        <BadgeCheck size={28} />
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-slate-600 dark:text-slate-400 capitalize font-medium mt-1">
+                    {profile?.role || 'Member'} • SMK Wikrama Bogor
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Content Area */}
-        <div className="pt-24 pb-8 px-8 flex flex-col lg:flex-row gap-8">
+        <div className="py-8 px-8 flex flex-col lg:flex-row gap-8">
           
           {/* Sidebar Navigation */}
           <div className="w-full lg:w-64 flex-shrink-0">
