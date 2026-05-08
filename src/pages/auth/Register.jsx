@@ -3,19 +3,20 @@ import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabaseClient';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
-import { Mail, Lock, User, Briefcase } from 'lucide-react';
+import { Mail, Lock, User, Hash } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const [formData, setFormData] = useState({
     fullName: '',
+    nisn: '',
     email: '',
     password: '',
     role: 'murid',
     honeypot: '' // Anti-spam
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [cooldown, setCooldown] = useState(0);
   const navigate = useNavigate();
@@ -48,16 +49,21 @@ const Register = () => {
     
     // 1. Anti-Spam Honeypot Check
     if (formData.honeypot) {
-      setError('Aktivitas mencurigakan terdeteksi.');
+      toast.error('Aktivitas mencurigakan terdeteksi.');
       setCooldown(30);
       return;
     }
 
+    // 2. NISN Validation
+    if (formData.nisn.length !== 10 || isNaN(formData.nisn)) {
+      toast.error('Format NISN tidak valid. Harus 10 digit angka.');
+      return;
+    }
+
     setLoading(true);
-    setError(null);
 
     try {
-      // 2. Cek duplikasi Nama Lengkap di tabel profiles (Username Uniqueness)
+      // Cek duplikasi Nama Lengkap di tabel profiles (Username Uniqueness)
       const { data: existingUser } = await supabase
         .from('profiles')
         .select('id')
@@ -68,13 +74,15 @@ const Register = () => {
         throw new Error('Nama ini sudah digunakan. Silakan tambahkan angka atau nama belakang unik.');
       }
 
-      // 3. Register user (Email uniqueness handled by Supabase)
+      // Register user (Email uniqueness handled by Supabase)
       const { error: signUpError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
           data: {
             full_name: formData.fullName,
+            nisn: formData.nisn, // Store NISN in raw metadata
+            verified_status: true, // Auto-verified based on valid mock NISN
             role: 'murid' // Force murid role
           },
           emailRedirectTo: import.meta.env.PROD 
@@ -91,9 +99,10 @@ const Register = () => {
       }
       
       setSuccess(true);
+      toast.success('Pendaftaran berhasil! Mengalihkan ke halaman login...');
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
-      setError(err.message || 'Gagal mendaftar. Silakan coba lagi.');
+      toast.error(err.message || 'Gagal mendaftar. Silakan coba lagi.');
       setCooldown(30); // 30s Cooldown on failure to prevent spam
     } finally {
       setLoading(false);
@@ -116,16 +125,10 @@ const Register = () => {
         {success ? (
           <div className="bg-green-50 text-green-700 p-6 rounded-xl text-center border border-green-100">
             <h3 className="font-bold text-lg mb-2">Registrasi Berhasil!</h3>
-            <p className="text-sm">Silakan login menggunakan kredensial Anda. Mengalihkan...</p>
+            <p className="text-sm">Silakan cek email untuk verifikasi, atau tunggu jika verifikasi otomatis diaktifkan.</p>
           </div>
         ) : (
-          <form className="mt-8 space-y-6" onSubmit={handleRegister}>
-            {error && (
-              <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm border border-red-100">
-                {error}
-              </div>
-            )}
-            
+          <form className="mt-8 space-y-6" onSubmit={handleRegister}>            
             <div className="space-y-4">
               {/* Honeypot Field (Hidden from normal users) */}
               <div className="hidden" aria-hidden="true">
@@ -140,6 +143,16 @@ const Register = () => {
                 placeholder="Budi Santoso"
                 value={formData.fullName}
                 onChange={handleChange}
+              />
+              <Input
+                label="NISN (Untuk Verifikasi)"
+                name="nisn"
+                required
+                icon={Hash}
+                placeholder="0012345678"
+                value={formData.nisn}
+                onChange={handleChange}
+                maxLength="10"
               />
               <Input
                 label="Email"

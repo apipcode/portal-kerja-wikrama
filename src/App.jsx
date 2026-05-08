@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import AdminDashboard from './pages/admin/Dashboard';
 import JobDetail from './pages/JobDetail';
 import ErrorBoundary from './components/common/ErrorBoundary';
+import { Toaster } from 'react-hot-toast';
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requireRole }) => {
@@ -84,6 +85,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col font-sans transition-colors">
+          <Toaster position="top-center" toastOptions={{ duration: 4000, style: { background: '#333', color: '#fff' } }} />
           <Navbar />
           
           <main className="flex-grow pt-16">

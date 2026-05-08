@@ -4,14 +4,13 @@ import { supabase } from '../../lib/supabaseClient';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import { Mail, Lock, Briefcase } from 'lucide-react';
-
+import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
   
   // Safe auth extraction to prevent blank screen
@@ -27,7 +26,6 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
 
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -36,14 +34,15 @@ const Login = () => {
       });
 
       if (error) throw error;
+      toast.success('Login berhasil!');
       navigate('/');
     } catch (err) {
       if (err.message === 'Email not confirmed') {
-        setError('Email belum diverifikasi. Silakan cek Inbox/Spam di email Anda untuk link verifikasi.');
+        toast.error('Email belum diverifikasi. Silakan cek Inbox/Spam di email Anda untuk link verifikasi.', { duration: 6000 });
       } else if (err.message === 'Invalid login credentials') {
-        setError('Email atau password salah. Silakan coba lagi.');
+        toast.error('Email atau password salah. Silakan coba lagi.');
       } else {
-        setError(err.message || 'Gagal login. Cek kembali email dan password Anda.');
+        toast.error(err.message || 'Gagal login. Cek kembali email dan password Anda.');
       }
     } finally {
       setLoading(false);
@@ -64,11 +63,6 @@ const Login = () => {
         </div>
         
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-          {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm border border-red-100">
-              {error}
-            </div>
-          )}
           
           <div className="space-y-4">
             <Input

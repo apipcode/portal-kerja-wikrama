@@ -11,6 +11,7 @@ import {
   MessageSquare, Printer, BrainCircuit, Target, Coins, Briefcase
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 
 const Profile = () => {
   const { user, profile, setProfile } = useAuth();
@@ -321,6 +322,42 @@ const Profile = () => {
               {/* TAB: SERTIFIKAT & KONEKSI */}
               {activeTab === 'koneksi' && (
                 <div className="space-y-6">
+                  {/* Skill Radar Chart */}
+                  <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col md:flex-row gap-8 items-center">
+                    <div className="w-full md:w-1/2 h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={[
+                          { subject: 'Logic/Algoritma', A: 90, fullMark: 100 },
+                          { subject: 'Web Design', A: 85, fullMark: 100 },
+                          { subject: 'Database', A: 75, fullMark: 100 },
+                          { subject: 'Communication', A: 80, fullMark: 100 },
+                          { subject: 'Problem Solving', A: 85, fullMark: 100 },
+                          { subject: 'Teamwork', A: 90, fullMark: 100 },
+                        ]}>
+                          <PolarGrid stroke="#e2e8f0" />
+                          <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748b', fontSize: 12 }} />
+                          <Radar name="Kompetensi Siswa" dataKey="A" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.5} />
+                        </RadarChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <div className="w-full md:w-1/2">
+                      <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2 flex items-center gap-2">
+                        <Target className="text-blue-500" /> Profil Kompetensi (Skill Radar)
+                      </h3>
+                      <p className="text-sm text-slate-500 mb-4">Visualisasi keahlian berdasarkan nilai rapor dan evaluasi guru produktif. Memudahkan HRD melihat keunggulan teknis dan *soft-skill* secara instan.</p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl border border-blue-100 dark:border-blue-800/50">
+                          <p className="text-xs text-blue-600 dark:text-blue-400">Top Hard Skill</p>
+                          <p className="font-bold text-slate-800 dark:text-white">Logic/Algoritma (90)</p>
+                        </div>
+                        <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-xl border border-green-100 dark:border-green-800/50">
+                          <p className="text-xs text-green-600 dark:text-green-400">Top Soft Skill</p>
+                          <p className="font-bold text-slate-800 dark:text-white">Teamwork (90)</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
                     <div className="flex justify-between items-center mb-6">
                       <h3 className="text-lg font-semibold text-slate-800 dark:text-white flex items-center gap-2">

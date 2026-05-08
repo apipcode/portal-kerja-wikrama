@@ -59,9 +59,15 @@ const AdminDashboard = () => {
             {/* TRACER STUDY */}
             {activeTab === 'tracer' && (
               <div>
-                <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
-                  <BarChart3 className="text-primary" /> Tracer Study & BKK Analytics
-                </h2>
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                    <BarChart3 className="text-primary" /> Tracer Study & BKK Analytics
+                  </h2>
+                  <Button variant="outline" className="flex items-center gap-2 text-sm bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    <FileCheck className="w-4 h-4 text-green-600" />
+                    Export Format Kemendikbud
+                  </Button>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                   <div className="p-4 rounded-xl border border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
                     <p className="text-sm text-slate-500 mb-1">Total Alumni Terdaftar</p>
@@ -151,34 +157,55 @@ const AdminDashboard = () => {
               </div>
             )}
 
-            {/* MITRA INDUSTRI */}
+            {/* MITRA INDUSTRI (MOU TRACKING) */}
             {activeTab === 'mitra' && (
               <div>
-                <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
-                  <ShieldCheck className="text-blue-500" /> Mitra Industri Terverifikasi
-                </h2>
-                
-                <div className="flex items-center justify-between mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800/50">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="text-blue-600 dark:text-blue-400" />
-                    <div>
-                      <h4 className="font-semibold text-blue-900 dark:text-blue-300">Verified Company Badge</h4>
-                      <p className="text-sm text-blue-700 dark:text-blue-400">Berikan lencana biru resmi untuk instansi terpercaya.</p>
-                    </div>
-                  </div>
-                  <Button variant="outline" className="border-blue-200 text-blue-700 hover:bg-blue-100">Kelola Badge</Button>
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                    <ShieldCheck className="text-blue-500" /> MOU & Mitra Industri
+                  </h2>
+                  <Button variant="primary" className="text-sm">Tambah Mitra Baru</Button>
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="border border-slate-200 dark:border-slate-700 p-4 rounded-xl flex justify-between items-center bg-white dark:bg-slate-800">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-slate-100 dark:bg-slate-700 rounded-lg"></div>
-                      <div>
-                        <h4 className="font-semibold dark:text-white">PT Teknologi Digital</h4>
-                        <p className="text-xs text-slate-500">12 Lowongan Aktif</p>
-                      </div>
-                    </div>
-                    <span className="text-blue-500"><ShieldCheck size={20} /></span>
+                
+                <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm overflow-hidden mb-6">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-sm">
+                      <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-400">
+                        <tr>
+                          <th className="px-6 py-4 font-semibold">Nama Perusahaan</th>
+                          <th className="px-6 py-4 font-semibold">Sektor</th>
+                          <th className="px-6 py-4 font-semibold">Tgl. Kesepakatan</th>
+                          <th className="px-6 py-4 font-semibold">Status MOU</th>
+                          <th className="px-6 py-4 font-semibold">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-700 text-slate-700 dark:text-slate-300">
+                        <tr className="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
+                          <td className="px-6 py-4 font-medium flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold">TC</div>
+                            PT TechCorp Indonesia
+                          </td>
+                          <td className="px-6 py-4">Teknologi Informasi</td>
+                          <td className="px-6 py-4">12 Jan 2025</td>
+                          <td className="px-6 py-4">
+                            <span className="px-2.5 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold border border-green-200">Active</span>
+                          </td>
+                          <td className="px-6 py-4"><button className="text-primary hover:underline font-medium">Detail</button></td>
+                        </tr>
+                        <tr className="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
+                          <td className="px-6 py-4 font-medium flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-lg bg-red-100 text-red-700 flex items-center justify-center font-bold">MN</div>
+                            MediaNusa Group
+                          </td>
+                          <td className="px-6 py-4">Media & Telekomunikasi</td>
+                          <td className="px-6 py-4">05 Mar 2023</td>
+                          <td className="px-6 py-4">
+                            <span className="px-2.5 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold border border-red-200">Expired</span>
+                          </td>
+                          <td className="px-6 py-4"><button className="text-primary hover:underline font-medium">Perbarui MOU</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
