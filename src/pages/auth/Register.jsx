@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabaseClient';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import { Mail, Lock, User, Briefcase } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,16 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
   const [cooldown, setCooldown] = useState(0);
   const navigate = useNavigate();
+
+  // Safe auth extraction to prevent blank screen
+  const auth = useAuth();
+  
+  // Redirect if already logged in
+  useEffect(() => {
+    if (auth && auth.user) {
+      navigate('/profile');
+    }
+  }, [auth, navigate]);
 
   useEffect(() => {
     let timer;

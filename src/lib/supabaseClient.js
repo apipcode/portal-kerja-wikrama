@@ -3,6 +3,10 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn("⚠️ VITE_SUPABASE_URL atau VITE_SUPABASE_ANON_KEY tidak ditemukan di environment variables! Aplikasi akan berjalan dalam Mock Mode.");
+}
+
 // Default Mock Data for Jobs
 const MOCK_JOBS = [
   { id: 1, title: 'Frontend Developer', company_name: 'PT Teknologi Digital', location: 'Jakarta Selatan', description: 'Membutuhkan Frontend Developer dengan React', created_at: new Date().toISOString() },

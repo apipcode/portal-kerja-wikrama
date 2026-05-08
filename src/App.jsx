@@ -10,6 +10,7 @@ import Register from './pages/auth/Register';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/admin/Dashboard';
 import JobDetail from './pages/JobDetail';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requireRole }) => {
@@ -86,27 +87,29 @@ function App() {
           <Navbar />
           
           <main className="flex-grow pt-16">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/jobs" element={<JobBoard />} />
-              <Route path="/jobs/:id" element={<JobDetail />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              
-              <Route path="/profile" element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              } />
-              
-              <Route path="/admin/dashboard" element={
-                <ProtectedRoute requireRole="admin">
-                  <AdminDashboard />
-                </ProtectedRoute>
-              } />
-              
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/jobs" element={<JobBoard />} />
+                <Route path="/jobs/:id" element={<JobDetail />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                
+                <Route path="/profile" element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/admin/dashboard" element={
+                  <ProtectedRoute requireRole="admin">
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </ErrorBoundary>
           </main>
 
           <Footer />

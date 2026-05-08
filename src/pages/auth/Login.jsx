@@ -5,12 +5,24 @@ import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import { Mail, Lock, Briefcase } from 'lucide-react';
 
+import { useAuth } from '../../context/AuthContext';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  
+  // Safe auth extraction to prevent blank screen
+  const auth = useAuth();
+  
+  // Redirect if already logged in
+  React.useEffect(() => {
+    if (auth && auth.user) {
+      navigate('/profile');
+    }
+  }, [auth, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
