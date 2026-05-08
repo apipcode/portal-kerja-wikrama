@@ -28,12 +28,16 @@ const HeroSection = ({ onSearch }) => {
   };
 
   return (
-    <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-primary/5 to-white dark:from-slate-900 dark:to-slate-900 transition-colors">
-      {/* Background decorations */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[70%] rounded-full bg-primary/5 dark:bg-primary/10 blur-3xl" />
-        <div className="absolute top-[20%] -left-[10%] w-[40%] h-[60%] rounded-full bg-secondary/10 dark:bg-secondary/5 blur-3xl" />
-      </div>
+    <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden transition-colors"
+      style={{
+        backgroundImage: 'url(/lapangan.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      {/* White overlay for readability */}
+      <div className="absolute inset-0 bg-white/75 dark:bg-slate-900/80" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center max-w-4xl mx-auto">
@@ -45,11 +49,11 @@ const HeroSection = ({ onSearch }) => {
             <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 dark:bg-secondary/10 text-secondary-dark dark:text-secondary font-semibold text-sm mb-6 border border-secondary/30 dark:border-secondary/20 shadow-sm">
               🚀 Portal Karir Resmi SMK Wikrama Bogor
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white leading-tight mb-6 drop-shadow-sm">
               Mulai Langkah Suksesmu <br className="hidden md:block" />
               Bersama <span className="text-primary dark:text-primary-light">Mitra Industri Terbaik</span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 mb-10 max-w-2xl mx-auto font-medium drop-shadow-sm">
               Temukan peluang karir yang tepat untuk masa depanmu. Ratusan posisi menunggu alumni terbaik SMK Wikrama.
             </p>
           </motion.div>
@@ -98,19 +102,19 @@ const HeroSection = ({ onSearch }) => {
           >
             <div className="flex flex-col items-center p-4">
               <span className="text-3xl font-bold text-primary mb-1">500+</span>
-              <span className="text-sm text-slate-500 font-medium text-center">Alumni Terserap</span>
+              <span className="text-sm text-slate-600 dark:text-slate-300 font-semibold text-center">Alumni Terserap</span>
             </div>
-            <div className="flex flex-col items-center p-4 border-l border-slate-200/60">
+            <div className="flex flex-col items-center p-4 border-l border-slate-300/60">
               <span className="text-3xl font-bold text-primary mb-1">100+</span>
-              <span className="text-sm text-slate-500 font-medium text-center">Mitra Industri</span>
+              <span className="text-sm text-slate-600 dark:text-slate-300 font-semibold text-center">Mitra Industri</span>
             </div>
-            <div className="flex flex-col items-center p-4 md:border-l border-slate-200/60 hidden md:flex">
+            <div className="flex flex-col items-center p-4 md:border-l border-slate-300/60 hidden md:flex">
               <span className="text-3xl font-bold text-primary mb-1">50+</span>
-              <span className="text-sm text-slate-500 font-medium text-center">Lowongan Aktif</span>
+              <span className="text-sm text-slate-600 dark:text-slate-300 font-semibold text-center">Lowongan Aktif</span>
             </div>
-            <div className="flex flex-col items-center p-4 md:border-l border-slate-200/60 hidden md:flex">
+            <div className="flex flex-col items-center p-4 md:border-l border-slate-300/60 hidden md:flex">
               <span className="text-3xl font-bold text-primary mb-1">7</span>
-              <span className="text-sm text-slate-500 font-medium text-center">Program Keahlian</span>
+              <span className="text-sm text-slate-600 dark:text-slate-300 font-semibold text-center">Program Keahlian</span>
             </div>
           </motion.div>
         </div>

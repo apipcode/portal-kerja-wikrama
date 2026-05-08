@@ -61,7 +61,7 @@ const JobCard = ({ job }) => {
       
       <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
         <div className="flex flex-wrap gap-2">
-          {job.tags.slice(0, 2).map((tag, i) => (
+          {(job.tags ?? []).slice(0, 2).map((tag, i) => (
             <Badge key={i} variant={i === 2 ? "secondary" : "gray"}>{tag}</Badge>
           ))}
         </div>
@@ -102,7 +102,7 @@ const JobBoard = ({ initialSearchQuery = '' }) => {
            // We have real data
            let filtered = data;
            if (activeFilter !== 'Semua') {
-             filtered = data.filter(job => job.tags && job.tags.includes(activeFilter));
+             filtered = data.filter(job => (job.tags ?? []).includes(activeFilter));
            }
            setJobs(filtered);
         } else {
@@ -117,7 +117,7 @@ const JobBoard = ({ initialSearchQuery = '' }) => {
              );
            }
            if (activeFilter !== 'Semua') {
-             filtered = filtered.filter(job => job.tags.includes(activeFilter));
+             filtered = filtered.filter(job => (job.tags ?? []).includes(activeFilter));
            }
            setJobs(filtered);
         }
