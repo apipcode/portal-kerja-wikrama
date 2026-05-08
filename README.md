@@ -14,30 +14,45 @@ Proyek ini merupakan bentuk Full Reconstruction & Redesign dari versi sebelumnya
 
 ---
 
-## 🌟 15 Fitur Lengkap Aplikasi
+## 🌟 Fitur Aplikasi Lengkap
 
-Platform ini terbagi ke dalam tiga modul utama, masing-masing dengan fungsionalitas mutakhir untuk memaksimalkan pengalaman pengguna:
+Platform ini mengintegrasikan fungsionalitas inti yang sudah siap pakai dengan cetak biru (roadmap) fitur masa depan, menjadikannya sangat fungsional dan terukur (scalable).
 
-### Module 1: Fitur Murid & Alumni (Talent Hub)
-1. **AI CV Analysis** - Antarmuka (UI) cerdas yang menganalisis dan memvisualisasikan tingkat kelengkapan CV PDF alumni secara otomatis.
-2. **Smart Jurusan Filter** - Sistem papan lowongan kerja dengan filter *real-time* cerdas berbasis 7 program keahlian SMK Wikrama (PPLG, TJKT, DKV, PMN, dll).
-3. **Application Pipeline** - Dashboard lamaran visual yang menyajikan status *tracking* pelamar mulai dari tahap *Pending, Interview*, hingga *Accepted*.
-4. **Portfolio Showcase** - Integrasi input URL eksternal di halaman Profil agar murid dapat memamerkan karya dari GitHub maupun Behance.
-5. **Digital QR Card** - Kemampuan auto-generate QR Code yang merujuk langsung ke *public profile* atau CV murid.
-6. **Job Alerts** - Sistem notifikasi (*Toast/Badge*) cerdas yang muncul jika ada pembaruan atau lowongan baru yang relevan dengan jurusan murid.
+### 🚀 Fitur Inti yang Telah Tersedia (Core Ready)
+- **Role-Based Authentication**: Sistem Login & Registrasi dengan enkripsi aman, membedakan hak akses untuk `Guru/BKK` dan `Murid/Alumni`.
+- **Hybrid Database System**: Menggunakan Supabase asli jika ENV diisi, atau secara cerdas beralih ke *LocalStorage Fallback* untuk demo/Vercel.
+- **Dynamic Profile Management**: Halaman profil yang terproteksi, memungkinkan edit Nama, Jurusan, Bio, URL Portofolio (GitHub), dan Avatar.
+- **PDF CV Upload Engine**: Fitur Drag-and-Drop unggah CV dengan batasan format & ukuran (Maks 2MB), dilengkapi progres bar visual dan manajemen *mock storage*.
+- **Interactive Job Board**: Papan lowongan interaktif dengan *Smart Filter* berbasis jurusan.
+- **Theme Engine**: Transisi mulus antara *Dark Mode* dan *Light Mode* (persisten).
+- **PWA Ready**: Dukungan *Progressive Web App* yang memungkinkan instalasi web di perangkat *mobile* dan *desktop*.
 
-### Module 2: Fitur Guru & Admin BKK (Moderation & Analytics)
-7. **Verified Badge** - Tombol validasi eksklusif di dashboard Guru untuk memberikan tanda "Terverifikasi" (Badge Centang Biru) pada profil murid/alumni terpercaya.
-8. **Tracer Study Dashboard** - Panel analitik visual interaktif (memanfaatkan Chart.js/Recharts) untuk memantau statistik keterserapan alumni di industri.
-9. **Job Blast** - Sistem bagi Guru untuk menandai lowongan kerja tertentu sebagai "Prioritas" agar selalu muncul di posisi teratas *feed* para murid.
-10. **Leaderboard** - Papan peringkat performa jurusan yang menampilkan tingkat persentase kebekerjaan alumni tertinggi secara periodik.
+---
 
-### Module 3: Fitur Industri & Advanced (Career Connect)
-11. **Interview Scheduler** - Integrasi sistem kalender terpadu antara HR Perusahaan dan Pelamar untuk melihat dan menyetujui jadwal wawancara.
-12. **Talent Search** - Kolom pencarian lanjutan (*Advanced Search*) bagi Guru dan Industri untuk memfilter data base murid berdasarkan spesifikasi kemampuan (*skill*) dan nilai rapor.
-13. **Company Branding** - Halaman profil spesifik untuk mitra industri yang mendukung galeri multimedia (foto/video) guna meningkatkan ketertarikan talenta.
-14. **Theme Engine** - Fitur Mode Gelap (Dark Mode) dan Terang (Light Mode) yang tersimpan secara persisten dalam *LocalStorage* peramban.
-15. **PWA Support** - Konfigurasi Web App Manifest (`manifest.json`) dan *Service Worker* dasar, memungkinkan web ini di-*install* menyerupai aplikasi *native* pada perangkat Android, iOS, maupun PC.
+### 🗺️ Peta Jalan Modul Pengembangan (15 NextGen Features)
+
+Sistem ini didesain untuk dikembangkan lebih jauh mencakup 15 fitur esensial ekosistem digital berikut:
+
+**Module 1: Fitur Murid & Alumni (Talent Hub)**
+1. **AI CV Analysis** - Antarmuka (UI) cerdas yang menganalisis kelengkapan CV PDF alumni.
+2. **Smart Jurusan Filter** - *Real-time* filter berbasis 7 program keahlian.
+3. **Application Pipeline** - Dashboard lamaran visual (*Pending, Interview, Accepted*).
+4. **Portfolio Showcase** - Etalase visual URL portofolio eksternal.
+5. **Digital QR Card** - Auto-generate QR Code yang merujuk ke public profile.
+6. **Job Alerts** - Sistem notifikasi (*Toast/Badge*) cerdas lowongan baru.
+
+**Module 2: Fitur Guru & Admin BKK (Moderation & Analytics)**
+7. **Verified Badge** - Lencana verifikasi ("Centang Biru") dari BKK untuk alumni.
+8. **Tracer Study Dashboard** - Panel analitik visual interaktif (Chart.js/Recharts) untuk statistik keterserapan.
+9. **Job Blast** - Penandaan lowongan kerja "Prioritas" agar tampil di posisi teratas *feed*.
+10. **Leaderboard** - Papan peringkat tingkat kebekerjaan alumni per-jurusan.
+
+**Module 3: Fitur Industri & Advanced (Career Connect)**
+11. **Interview Scheduler** - Integrasi sistem penjadwalan antara Perusahaan dan Pelamar.
+12. **Talent Search** - Kolom *Advanced Search* untuk menyeleksi murid berdasarkan *skill*/nilai.
+13. **Company Branding** - Halaman profil perusahaan yang mendukung galeri multimedia.
+14. **Theme Engine** - Mode Gelap/Terang *(Telah Diimplementasikan!)*
+15. **PWA Support** - Kemampuan aplikasi *native install* *(Telah Diimplementasikan!)*
 
 ---
 
