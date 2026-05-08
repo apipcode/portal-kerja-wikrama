@@ -60,7 +60,16 @@ const Profile = () => {
         .update(updates)
         .eq('id', user.id);
 
-      if (error) throw error;
+      if (error) {
+        // Handle case where table is missing in Supabase
+        if (error.message.includes('schema cache') || error.message.includes('relation "public.profiles" does not exist')) {
+          console.warn("Table 'profiles' is missing in Supabase. Falling back to local state update.");
+          setProfile({ ...profile, ...updates });
+          setMessage({ type: 'success', text: 'Profil disimpan sementara (Mode Mocking: Tabel Database belum dibuat).' });
+          return;
+        }
+        throw error;
+      }
       
       if (data) {
         setProfile(data);
