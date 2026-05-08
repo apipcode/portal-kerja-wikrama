@@ -164,6 +164,8 @@ Berikut panduan memulai integrasi aplikasi ini di dalam *localhost* Anda:
 
    > **💡 PERHATIAN - Hybrid Mode**: Jika variabel `.env` di atas *TIDAK ADA* atau sengaja dikosongkan, sistem sama sekali tidak akan menolak (crash) operasi program. Berkat fitur *Hybrid Mock*, sistem secara mulus menyalin seluruh fungsionalitas (Register, Login, Input Bio, & Upload PDF) menggunakan memori `LocalStorage` pada peramban/browser (berlaku seolah-olah Supabase aktif 100%).
 
+   > **🛡️ KEAMANAN PRODUKSI - ANTI SPAM**: Saat mempublikasikan sistem ini (*Live*), **Wajib** masuk ke Dashboard Supabase Anda -> `Authentication` -> `Rate Limits`. Atur `Max Sign-Up Attempts` menjadi angka wajar (misal: 10 per jam) untuk mencegah serangan *brute-force* pembuatan akun palsu.
+
 4. **Kompilasi & Pemutaran (Start)**
    Uji coba aplikasi pada tahap lokal menggunakan Vite Local Server.
    ```bash

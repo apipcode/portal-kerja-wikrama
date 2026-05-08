@@ -10,12 +10,22 @@ const Register = () => {
     fullName: '',
     email: '',
     password: '',
-    role: 'murid'
+    role: 'murid',
+    honeypot: '' // Anti-spam
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let timer;
+    if (cooldown > 0) {
+      timer = setInterval(() => setCooldown((c) => c - 1), 1000);
+    }
+    return () => clearInterval(timer);
+  }, [cooldown]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,40 +33,71 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (cooldown > 0) return;
+    
+    // 1. Anti-Spam Honeypot Check
+    if (formData.honeypot) {
+      setError('Aktivitas mencurigakan terdeteksi.');
+      setCooldown(30);
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
-      const { error } = await supabase.auth.signUp({
+      // 2. Cek duplikasi Nama Lengkap di tabel profiles (Username Uniqueness)
+      const { data: existingUser } = await supabase
+        .from('profiles')
+        .select('id')
+        .ilike('full_name', formData.fullName)
+        .single();
+        
+      if (existingUser) {
+        throw new Error('Nama ini sudah digunakan. Silakan tambahkan angka atau nama belakang unik.');
+      }
+
+      // 3. Register user (Email uniqueness handled by Supabase)
+      const { error: signUpError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
           data: {
             full_name: formData.fullName,
-            role: formData.role
-          }
+            role: 'murid' // Force murid role
+          },
+          emailRedirectTo: import.meta.env.PROD 
+            ? 'https://portal-kerja-wikrama.vercel.app/login' 
+            : 'http://localhost:5173/login'
         }
       });
 
-      if (error) throw error;
+      if (signUpError) {
+        if (signUpError.message.includes('already registered')) {
+          throw new Error('Email ini sudah terdaftar.');
+        }
+        throw signUpError;
+      }
+      
       setSuccess(true);
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
       setError(err.message || 'Gagal mendaftar. Silakan coba lagi.');
+      setCooldown(30); // 30s Cooldown on failure to prevent spam
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-3xl shadow-soft border border-slate-100">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900 transition-colors py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-soft border border-slate-100 dark:border-slate-700">
         <div className="text-center">
           <div className="w-12 h-12 bg-secondary text-primary-dark rounded-xl flex items-center justify-center shadow-soft mx-auto mb-4">
             <User size={24} />
           </div>
-          <h2 className="mt-2 text-3xl font-extrabold text-slate-900">Buat Akun Baru</h2>
-          <p className="mt-2 text-sm text-slate-600">
+          <h2 className="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white">Buat Akun Baru</h2>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
             Bergabunglah dengan ekosistem karir Wikrama
           </p>
         </div>
@@ -75,6 +116,11 @@ const Register = () => {
             )}
             
             <div className="space-y-4">
+              {/* Honeypot Field (Hidden from normal users) */}
+              <div className="hidden" aria-hidden="true">
+                <input type="text" name="honeypot" tabIndex="-1" autoComplete="off" value={formData.honeypot} onChange={handleChange} />
+              </div>
+
               <Input
                 label="Nama Lengkap"
                 name="fullName"
@@ -107,8 +153,8 @@ const Register = () => {
               />
             </div>
 
-            <Button type="submit" className="w-full py-3" disabled={loading}>
-              {loading ? 'Memproses...' : 'Daftar Sekarang'}
+            <Button type="submit" className="w-full py-3" disabled={loading || cooldown > 0}>
+              {loading ? 'Memproses...' : cooldown > 0 ? `Tunggu ${cooldown} detik` : 'Daftar Sekarang'}
             </Button>
           </form>
         )}

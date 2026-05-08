@@ -77,10 +77,17 @@ class MockSupabase {
             }
             return { data: null, error: null };
           },
+          ilike: function(column, value) {
+            // just return this so we can chain .single() or await it
+            return this; 
+          },
+          or: function(query) {
+            return this;
+          },
           single: async () => {
              // Mock single response logic for profile
              const profiles = JSON.parse(localStorage.getItem('mock_profiles') || '[]');
-             return { data: profiles[0] || null, error: null }; // Naive implementation for demo
+             return { data: null, error: null }; // Mock always returns null for uniqueness check to pass
           },
           then: (resolve) => {
             // Support simple .select()

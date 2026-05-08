@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
@@ -23,28 +23,31 @@ const ProtectedRoute = ({ children, requireRole }) => {
 };
 
 // Main Landing Page
-const Home = () => (
-  <>
-    <HeroSection />
-    
-    {/* Company Partnership Section Mini */}
-    <section className="py-10 bg-white dark:bg-slate-800 border-y border-slate-100 dark:border-slate-800 overflow-hidden transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-6">Dipercaya oleh Perusahaan Terkemuka</p>
-        <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-          <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-blue-600 rounded-lg"></div> TechCorp</div>
-          <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-red-600 rounded-lg"></div> MediaNusa</div>
-          <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-green-600 rounded-lg"></div> AgroJaya</div>
-          <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-purple-600 rounded-lg"></div> HotelGrand</div>
-          <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-orange-600 rounded-lg"></div> OtoMaju</div>
+const Home = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  return (
+    <>
+      <HeroSection onSearch={setSearchQuery} />
+      
+      {/* Company Partnership Section Mini */}
+      <section className="py-10 bg-white dark:bg-slate-800 border-y border-slate-100 dark:border-slate-800 overflow-hidden transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-6">Dipercaya oleh Perusahaan Terkemuka</p>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-blue-600 rounded-lg"></div> TechCorp</div>
+            <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-red-600 rounded-lg"></div> MediaNusa</div>
+            <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-green-600 rounded-lg"></div> AgroJaya</div>
+            <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-purple-600 rounded-lg"></div> HotelGrand</div>
+            <div className="flex items-center gap-2 font-bold text-xl text-slate-800 dark:text-slate-200"><div className="w-8 h-8 bg-orange-600 rounded-lg"></div> OtoMaju</div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* Job Board Section in Landing Page */}
-    <JobBoard />
+      {/* Job Board Section in Landing Page */}
+      <JobBoard initialSearchQuery={searchQuery} />
 
-    {/* Alumni Testimonial Slider Mock */}
+      {/* Alumni Testimonial Slider Mock */}
     <section className="py-20 bg-primary/5 dark:bg-slate-900/50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
@@ -72,7 +75,8 @@ const Home = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 function App() {
   return (

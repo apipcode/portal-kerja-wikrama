@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Search, MapPin, Briefcase } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Button from '../common/Button';
 
-const HeroSection = () => {
+const HeroSection = ({ onSearch }) => {
+  const [query, setQuery] = useState('');
+  const [location, setLocation] = useState('');
+
+  const handleSearch = () => {
+    if (onSearch) {
+      // Pass the combined query or just the main query
+      onSearch(query);
+      // Optional: scroll to jobs section
+      const jobsSection = document.getElementById('lowongan');
+      if (jobsSection) {
+        jobsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
-    <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-primary/5 to-white">
+    <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-primary/5 to-white dark:from-slate-900 dark:to-slate-900 transition-colors">
       {/* Background decorations */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[70%] rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute top-[20%] -left-[10%] w-[40%] h-[60%] rounded-full bg-secondary/10 blur-3xl" />
+        <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[70%] rounded-full bg-primary/5 dark:bg-primary/10 blur-3xl" />
+        <div className="absolute top-[20%] -left-[10%] w-[40%] h-[60%] rounded-full bg-secondary/10 dark:bg-secondary/5 blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -19,14 +40,14 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 text-secondary-dark font-semibold text-sm mb-6 border border-secondary/30 shadow-sm">
+            <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 dark:bg-secondary/10 text-secondary-dark dark:text-secondary font-semibold text-sm mb-6 border border-secondary/30 dark:border-secondary/20 shadow-sm">
               🚀 Portal Karir Resmi SMK Wikrama Bogor
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white leading-tight mb-6">
               Mulai Langkah Suksesmu <br className="hidden md:block" />
-              Bersama <span className="text-primary">Mitra Industri Terbaik</span>
+              Bersama <span className="text-primary dark:text-primary-light">Mitra Industri Terbaik</span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto">
               Temukan peluang karir yang tepat untuk masa depanmu. Ratusan posisi menunggu alumni terbaik SMK Wikrama.
             </p>
           </motion.div>
@@ -36,26 +57,32 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="glassmorphism p-2 rounded-2xl md:rounded-full flex flex-col md:flex-row gap-2 max-w-3xl mx-auto relative z-10"
+            className="glassmorphism p-2 rounded-2xl md:rounded-full flex flex-col md:flex-row gap-2 max-w-3xl mx-auto relative z-10 dark:bg-slate-800/80 dark:border-slate-700"
           >
-            <div className="flex-1 relative flex items-center bg-white rounded-xl md:rounded-full px-4 py-3 md:py-0 border border-slate-100">
+            <div className="flex-1 relative flex items-center bg-white dark:bg-slate-700 rounded-xl md:rounded-full px-4 py-3 md:py-0 border border-slate-100 dark:border-slate-600">
               <Search className="w-5 h-5 text-slate-400 mr-2 flex-shrink-0" />
               <input 
                 type="text" 
                 placeholder="Posisi, skill, atau perusahaan..." 
-                className="w-full bg-transparent border-none focus:ring-0 outline-none text-slate-700"
+                className="w-full bg-transparent border-none focus:ring-0 outline-none text-slate-700 dark:text-white placeholder:text-slate-400"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
               />
             </div>
-            <div className="hidden md:block w-px bg-slate-200 my-2"></div>
-            <div className="flex-1 relative flex items-center bg-white rounded-xl md:rounded-full px-4 py-3 md:py-0 border border-slate-100">
+            <div className="hidden md:block w-px bg-slate-200 dark:bg-slate-600 my-2"></div>
+            <div className="flex-1 relative flex items-center bg-white dark:bg-slate-700 rounded-xl md:rounded-full px-4 py-3 md:py-0 border border-slate-100 dark:border-slate-600">
               <MapPin className="w-5 h-5 text-slate-400 mr-2 flex-shrink-0" />
               <input 
                 type="text" 
                 placeholder="Lokasi kerja..." 
-                className="w-full bg-transparent border-none focus:ring-0 outline-none text-slate-700"
+                className="w-full bg-transparent border-none focus:ring-0 outline-none text-slate-700 dark:text-white placeholder:text-slate-400"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                onKeyDown={handleKeyDown}
               />
             </div>
-            <Button className="py-3 md:py-2 md:px-8 rounded-xl md:rounded-full text-base whitespace-nowrap">
+            <Button onClick={handleSearch} className="py-3 md:py-2 md:px-8 rounded-xl md:rounded-full text-base whitespace-nowrap">
               Cari Kerja
             </Button>
           </motion.div>

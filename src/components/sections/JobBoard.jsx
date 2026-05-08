@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { supabase } from '../../lib/supabaseClient';
 import { Building2, MapPin, Clock, DollarSign, BookmarkPlus } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Badge from '../common/Badge';
@@ -70,12 +71,65 @@ const JobCard = ({ job }) => {
   );
 };
 
-const JobBoard = () => {
+const JobBoard = ({ initialSearchQuery = '' }) => {
   const [activeFilter, setActiveFilter] = useState('Semua');
+  const [jobs, setJobs] = useState(MOCK_JOBS);
+  const [loading, setLoading] = useState(false);
 
-  const filteredJobs = activeFilter === 'Semua' 
-    ? MOCK_JOBS 
-    : MOCK_JOBS.filter(job => job.tags.includes(activeFilter));
+  useEffect(() => {
+    const fetchJobs = async () => {
+      setLoading(true);
+      try {
+        // Here is where we query Supabase.
+        // We use isMock (if we had it imported) or just fallback to local filter
+        // If we are actually connected to Supabase:
+        let query = supabase.from('jobs').select('*');
+        
+        if (initialSearchQuery) {
+          // Logika pencarian OR dan ILIKE sesuai instruksi
+          const searchPattern = `%${initialSearchQuery}%`;
+          query = query.or(`title.ilike.${searchPattern},company.ilike.${searchPattern},description.ilike.${searchPattern}`);
+        }
+        
+        if (activeFilter !== 'Semua') {
+          // Asumsikan struktur data tabel real mendukung filter array atau contains.
+          // Untuk amannya di demo kita filter local saja setelah data didapat
+        }
+
+        const { data, error } = await query;
+        
+        if (!error && data && data.length > 0) {
+           // We have real data
+           let filtered = data;
+           if (activeFilter !== 'Semua') {
+             filtered = data.filter(job => job.tags && job.tags.includes(activeFilter));
+           }
+           setJobs(filtered);
+        } else {
+           // Fallback to MOCK_JOBS if error or no data (for local dev/mock)
+           let filtered = MOCK_JOBS;
+           if (initialSearchQuery) {
+             const q = initialSearchQuery.toLowerCase();
+             filtered = filtered.filter(job => 
+               job.title.toLowerCase().includes(q) || 
+               job.company.toLowerCase().includes(q) || 
+               job.description.toLowerCase().includes(q)
+             );
+           }
+           if (activeFilter !== 'Semua') {
+             filtered = filtered.filter(job => job.tags.includes(activeFilter));
+           }
+           setJobs(filtered);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, [initialSearchQuery, activeFilter]);
 
   const container = {
     hidden: { opacity: 0 },
@@ -121,22 +175,28 @@ const JobBoard = () => {
 
           {/* Job Grid */}
           <div className="flex-1">
-            <motion.div 
-              variants={container}
-              initial="hidden"
-              animate="show"
-              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6"
-            >
-              {filteredJobs.length > 0 ? (
-                filteredJobs.map(job => (
-                  <JobCard key={job.id} job={job} />
-                ))
-              ) : (
-                <div className="col-span-full text-center py-12 bg-white rounded-2xl border border-slate-100">
-                  <p className="text-slate-500">Tidak ada lowongan untuk jurusan ini saat ini.</p>
-                </div>
-              )}
-            </motion.div>
+            {loading ? (
+              <div className="flex justify-center py-12">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+              </div>
+            ) : (
+              <motion.div 
+                variants={container}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6"
+              >
+                {jobs.length > 0 ? (
+                  jobs.map(job => (
+                    <JobCard key={job.id} job={job} />
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm transition-colors">
+                    <p className="text-slate-500 dark:text-slate-400 text-lg">Maaf, lowongan yang Anda cari belum tersedia.</p>
+                  </div>
+                )}
+              </motion.div>
+            )}
           </div>
         </div>
       </div>
