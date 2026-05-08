@@ -127,8 +127,9 @@ const Profile = () => {
                   <div className="flex items-center gap-2">
                     <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{profile?.full_name || 'User'}</h1>
                     {profile?.verified_status && (
-                      <div className="text-blue-500" title="Akun Terverifikasi BKK">
+                      <div className="text-blue-500 flex flex-col items-center" title="Akun Terverifikasi BKK & LSP">
                         <BadgeCheck size={28} />
+                        <span className="text-[10px] font-bold mt-1 bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full border border-blue-200">Verified by LSP</span>
                       </div>
                     )}
                   </div>
@@ -260,6 +261,22 @@ const Profile = () => {
               {/* TAB: AI & KARIR */}
               {activeTab === 'ai' && (
                 <div className="space-y-6">
+                  
+                  {/* AI Career Mentor (Wikrama Chat-Agent) */}
+                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+                    <div className="relative z-10">
+                      <h3 className="text-xl font-bold flex items-center gap-2 mb-2">
+                        <Sparkles className="text-yellow-300" /> AI Career Mentor (Wikrama Chat-Agent)
+                      </h3>
+                      <p className="text-blue-100 mb-4 max-w-xl text-sm">Tanya apa saja seputar tips interview, review CV, atau panduan memilih jalur karir yang tepat di industri digital.</p>
+                      <div className="bg-white/10 border border-white/20 rounded-xl p-1 flex">
+                        <input type="text" placeholder="Contoh: 'CV saya kurang apa untuk daftar di PT. Telkom?'" className="bg-transparent border-none text-white placeholder-blue-200 w-full px-4 outline-none text-sm" />
+                        <Button className="bg-white text-blue-600 hover:bg-blue-50 border-0 rounded-lg text-sm px-4 py-2">Tanya AI</Button>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20 p-6 rounded-2xl">
                     <div className="flex justify-between items-start mb-4">
                       <div>
@@ -317,7 +334,7 @@ const Profile = () => {
                         <div>
                           <h5 className="font-medium text-slate-800 dark:text-white text-sm">Sertifikat Kompetensi BNSP</h5>
                           <p className="text-xs text-slate-500">Pemrograman Web & Mobile</p>
-                          <span className="inline-block mt-2 text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">Tervalidasi</span>
+                          <span className="inline-block mt-2 text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">Verified by LSP</span>
                         </div>
                       </div>
                     </div>
@@ -358,6 +375,23 @@ const Profile = () => {
               {/* TAB: AKTIVITAS */}
               {activeTab === 'aktivitas' && (
                 <div className="space-y-6">
+                  {/* Real-time Interview Scheduler */}
+                  <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm border-l-4 border-l-primary">
+                    <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
+                      <Activity className="text-primary w-5 h-5" /> Jadwal Interview (Google Calendar Sync)
+                    </h3>
+                    <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl flex items-center justify-between">
+                      <div>
+                        <h4 className="font-semibold text-slate-800 dark:text-white">Interview: Frontend Developer</h4>
+                        <p className="text-sm text-slate-500">PT Bank Central Asia Tbk • 12 Mei 2026, 10:00 WIB</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button variant="outline" className="text-xs px-3 bg-white">Reschedule</Button>
+                        <Button variant="primary" className="text-xs px-3">Join Zoom</Button>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
                     <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
                       <Bookmark className="text-orange-500 w-5 h-5" /> Job Bookmark (Disimpan)

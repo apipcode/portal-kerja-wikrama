@@ -5,6 +5,7 @@ import {
   BarChart3, Megaphone, CalendarDays, ShieldCheck, 
   Workflow, Users, FileCheck, CheckCircle
 } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('tracer');
@@ -59,7 +60,7 @@ const AdminDashboard = () => {
             {activeTab === 'tracer' && (
               <div>
                 <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
-                  <BarChart3 className="text-primary" /> Tracer Study Dashboard
+                  <BarChart3 className="text-primary" /> Tracer Study & BKK Analytics
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                   <div className="p-4 rounded-xl border border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
@@ -67,7 +68,7 @@ const AdminDashboard = () => {
                     <h3 className="text-3xl font-bold text-slate-800 dark:text-white">1,240</h3>
                   </div>
                   <div className="p-4 rounded-xl border border-green-100 bg-green-50 dark:bg-green-900/20 dark:border-green-800/50">
-                    <p className="text-sm text-green-600 dark:text-green-400 mb-1">Sudah Bekerja</p>
+                    <p className="text-sm text-green-600 dark:text-green-400 mb-1">Keterserapan Bekerja</p>
                     <h3 className="text-3xl font-bold text-green-700 dark:text-green-300">85%</h3>
                   </div>
                   <div className="p-4 rounded-xl border border-blue-100 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800/50">
@@ -76,9 +77,33 @@ const AdminDashboard = () => {
                   </div>
                 </div>
                 
-                <div className="h-64 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700 flex items-center justify-center flex-col text-slate-400">
-                  <BarChart3 className="w-12 h-12 mb-2 opacity-50" />
-                  <p>Visualisasi Chart.js / Recharts akan dimuat di sini</p>
+                <div className="h-80 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-4">
+                  <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-4">Grafik Serapan Alumni per Jurusan (2024)</h3>
+                  <div className="w-full h-64">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart
+                        data={[
+                          { name: 'PPLG', bekerja: 80, kuliah: 15, wirausaha: 5 },
+                          { name: 'TJKT', bekerja: 70, kuliah: 20, wirausaha: 10 },
+                          { name: 'DKV', bekerja: 65, kuliah: 25, wirausaha: 10 },
+                          { name: 'PMN', bekerja: 90, kuliah: 5, wirausaha: 5 },
+                          { name: 'KLN', bekerja: 85, kuliah: 5, wirausaha: 10 },
+                          { name: 'HTL', bekerja: 88, kuliah: 2, wirausaha: 10 },
+                          { name: 'MPLB', bekerja: 75, kuliah: 15, wirausaha: 10 },
+                        ]}
+                        margin={{ top: 5, right: 20, left: -20, bottom: 5 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                        <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
+                        <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
+                        <Tooltip cursor={{ fill: 'transparent' }} contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                        <Legend iconType="circle" wrapperStyle={{ fontSize: '12px' }} />
+                        <Bar dataKey="bekerja" name="Bekerja" fill="#1e3a8a" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="kuliah" name="Kuliah" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="wirausaha" name="Wirausaha" fill="#facc15" radius={[4, 4, 0, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
                 </div>
               </div>
             )}

@@ -69,23 +69,24 @@ Sistem ini didesain menjadi dua poros utama: Fungsionalitas yang telah dibangun 
 
 Rancangan sistem ini diciptakan sangat modular berskala *Enterprise* agar ke depannya IT Developer dapat melanjutkan integrasi menuju 35 target fitur absolut berikut:
 
-**Module 1: Fitur Murid & Alumni (Talent Hub)**
-1. **AI CV Analysis** - Antarmuka (UI) cerdas penganalisis kelengkapan CV otomatis.
-2. **Smart Jurusan Filter** - *Real-time* filter berbasis 7 program keahlian *(Sudah Terbangun)*.
-3. **Application Pipeline** - Visualisasi Kanban *board* berisi jalur pelacakan status lamaran pelamar (*Pending, Interview, Accepted*).
-4. **Portfolio Showcase** - Input pengumpul URL portofolio *open-source* pelamar *(Sudah Terbangun)*.
-5. **Digital QR Card** - Modul otomatis penghasil *QR Code* merujuk spesifik ke *public profile* murid.
-6. **Job Alerts** - Lencana cerdas *in-app notifications* jika lowongan baru terbit.
-7. **AI Interview Simulator** - Latihan interview interaktif berbasis teks/suara dengan asisten AI.
-8. **Auto-Generate Surat Lamaran** - Generator Cover Letter otomatis berdasar deskripsi pekerjaan.
-9. **Skill Gap Analysis** - Analisis otomatis kekurangan *skill* murid untuk lowongan tertentu.
-10. **Portfolio Video** - Modul unggah video perkenalan diri (*Elevator Pitch*) durasi 60 detik.
+### ✨ 5 Fitur Institusi Sekolah (Baru)
+1. **🤖 AI Career Mentor:** Chatbot AI (Mockup API) untuk konsultasi review CV dan tips interview bagi murid.
+2. **🏅 Digital Skill Badge (LSP):** Status "Verified by LSP" pada profil untuk memvalidasi kompetensi sertifikasi BNSP.
+3. **📄 CV Builder Engine:** Fitur export data profil menjadi format PDF CV standar industri (Clean & ATS-Friendly).
+4. **📊 BKK Analytics Dashboard:** Halaman statistik keterserapan alumni dengan visualisasi grafis (menggunakan Recharts).
+5. **📅 Interview Calendar:** Penjadwalan interview terintegrasi (mockup Google Calendar Sync) langsung di dashboard murid.
+
+### 🌟 20 Fitur Ekosistem Tambahan
+1. **AI Interview Simulator:** Latihan interview berbasis teks/suara dengan AI.
+2. **Auto-Generate Cover Letter:** Pembuatan surat lamaran otomatis berdasar loker.
+3. **Skill Gap Analysis:** Analisis kekurangan skill murid terhadap permintaan industri.
+4. **Portfolio Video:** Elevator pitch 60 detik untuk menarik perhatian HRD.
+5. **Digital QR Card:** QR Code profil murid untuk networking.
 11. **Digital Certificate Vault** - Integrasi dan penyimpanan aman sertifikat BNSP/LSP.
 12. **Gaji Benchmark** - Informasi proyeksi gaji standar industri bagi lulusan SMK.
 13. **Sistem Mentorship** - Jembatan komunikasi alumni senior dengan adik kelas.
 14. **Job Bookmark** - Penyimpanan lowongan kerja favorit (*Wishlist*).
 15. **Dark Mode Schedule** - Pergantian mode gelap/terang otomatis mengikuti zona waktu.
-16. **Print CV to PDF** - Ekspor profil digital portal kerja menjadi berkas CV PDF berdesain profesional.
 
 **Module 2 & 3: Fitur Moderasi, Guru, & Koneksi Industri**
 17. **Verified Badge** - Lencana kontrol mutu eksklusif kelulusan siswa *(UI Sudah Terbangun)*.
