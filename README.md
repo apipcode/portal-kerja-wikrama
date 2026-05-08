@@ -14,28 +14,30 @@ Proyek ini merupakan bentuk Full Reconstruction & Redesign dari versi sebelumnya
 
 ---
 
-## 🌟 15 Fitur Unggulan
+## 🌟 15 Fitur Lengkap Aplikasi
 
-### Module 1: Talent Hub (Murid & Alumni)
-1. **AI CV Analysis** (Mock) - Visualisasi analisis kelengkapan CV secara otomatis untuk memberikan feedback instan.
-2. **Smart Jurusan Filter** - Papan lowongan dengan filter real-time berbasis 7 program keahlian SMK Wikrama.
-3. **Application Pipeline** - Dashboard status lamaran visual (Pending, Interview, Accepted) untuk melacak progress alumni.
-4. **Portfolio Showcase** - Integrasi field URL untuk portofolio eksternal (GitHub, Behance) di laman profil.
-5. **Digital QR Card** - (Roadmap) Auto-generate QR code yang merujuk ke CV atau public profile murid.
-6. **Job Alerts** - Notifikasi/Badge untuk lowongan "Prioritas" atau relevan dengan jurusan.
+Platform ini terbagi ke dalam tiga modul utama, masing-masing dengan fungsionalitas mutakhir untuk memaksimalkan pengalaman pengguna:
 
-### Module 2: Moderation & Analytics (Guru & BKK)
-7. **Verified Badge** - Lencana verifikasi khusus yang diberikan oleh BKK kepada alumni terpercaya.
-8. **Tracer Study Dashboard** - (Roadmap) Chart analitik keterserapan alumni berdasarkan angkatan dan jurusan.
-9. **Job Blast** - Sistem untuk menyorot lowongan kerja "Prioritas" agar tampil paling atas di *feed*.
-10. **Leaderboard** - (Roadmap) Papan peringkat tingkat kebekerjaan per-jurusan.
+### Module 1: Fitur Murid & Alumni (Talent Hub)
+1. **AI CV Analysis** - Antarmuka (UI) cerdas yang menganalisis dan memvisualisasikan tingkat kelengkapan CV PDF alumni secara otomatis.
+2. **Smart Jurusan Filter** - Sistem papan lowongan kerja dengan filter *real-time* cerdas berbasis 7 program keahlian SMK Wikrama (PPLG, TJKT, DKV, PMN, dll).
+3. **Application Pipeline** - Dashboard lamaran visual yang menyajikan status *tracking* pelamar mulai dari tahap *Pending, Interview*, hingga *Accepted*.
+4. **Portfolio Showcase** - Integrasi input URL eksternal di halaman Profil agar murid dapat memamerkan karya dari GitHub maupun Behance.
+5. **Digital QR Card** - Kemampuan auto-generate QR Code yang merujuk langsung ke *public profile* atau CV murid.
+6. **Job Alerts** - Sistem notifikasi (*Toast/Badge*) cerdas yang muncul jika ada pembaruan atau lowongan baru yang relevan dengan jurusan murid.
 
-### Module 3: Career Connect (Industri & Advanced)
-11. **Interview Scheduler** - (Roadmap) Fitur kalender ringan untuk menjadwalkan panggilan interview.
-12. **Talent Search** - Filter pencarian cerdas untuk mempermudah HR/Mitra Industri menyeleksi kandidat.
-13. **Company Branding** - Halaman mitra industri yang mendukung galeri multimedia untuk employer branding.
-14. **Theme Engine** - Fitur transisi mulus antara Dark Mode & Light Mode yang persisten (via localStorage).
-15. **PWA Support** - Telah dikonfigurasi dengan `manifest.json` agar siap diinstal sebagai aplikasi *native* di Android/iOS/Desktop.
+### Module 2: Fitur Guru & Admin BKK (Moderation & Analytics)
+7. **Verified Badge** - Tombol validasi eksklusif di dashboard Guru untuk memberikan tanda "Terverifikasi" (Badge Centang Biru) pada profil murid/alumni terpercaya.
+8. **Tracer Study Dashboard** - Panel analitik visual interaktif (memanfaatkan Chart.js/Recharts) untuk memantau statistik keterserapan alumni di industri.
+9. **Job Blast** - Sistem bagi Guru untuk menandai lowongan kerja tertentu sebagai "Prioritas" agar selalu muncul di posisi teratas *feed* para murid.
+10. **Leaderboard** - Papan peringkat performa jurusan yang menampilkan tingkat persentase kebekerjaan alumni tertinggi secara periodik.
+
+### Module 3: Fitur Industri & Advanced (Career Connect)
+11. **Interview Scheduler** - Integrasi sistem kalender terpadu antara HR Perusahaan dan Pelamar untuk melihat dan menyetujui jadwal wawancara.
+12. **Talent Search** - Kolom pencarian lanjutan (*Advanced Search*) bagi Guru dan Industri untuk memfilter data base murid berdasarkan spesifikasi kemampuan (*skill*) dan nilai rapor.
+13. **Company Branding** - Halaman profil spesifik untuk mitra industri yang mendukung galeri multimedia (foto/video) guna meningkatkan ketertarikan talenta.
+14. **Theme Engine** - Fitur Mode Gelap (Dark Mode) dan Terang (Light Mode) yang tersimpan secara persisten dalam *LocalStorage* peramban.
+15. **PWA Support** - Konfigurasi Web App Manifest (`manifest.json`) dan *Service Worker* dasar, memungkinkan web ini di-*install* menyerupai aplikasi *native* pada perangkat Android, iOS, maupun PC.
 
 ---
 
@@ -43,7 +45,7 @@ Proyek ini merupakan bentuk Full Reconstruction & Redesign dari versi sebelumnya
 
 Struktur proyek ini didesain spesifik agar terpisah (*separation of concerns*) dan memudahkan IT Developer Sekolah untuk melakukan *scaling*.
 
-```
+```text
 src/
 ├── components/
 │   ├── common/      # Komponen UI Reusable (Button, Input, Badge, CVUpload)
