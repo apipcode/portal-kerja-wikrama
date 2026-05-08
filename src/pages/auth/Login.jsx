@@ -38,7 +38,13 @@ const Login = () => {
       if (error) throw error;
       navigate('/');
     } catch (err) {
-      setError(err.message || 'Gagal login. Cek kembali email dan password Anda.');
+      if (err.message === 'Email not confirmed') {
+        setError('Email belum diverifikasi. Silakan cek Inbox/Spam di email Anda untuk link verifikasi.');
+      } else if (err.message === 'Invalid login credentials') {
+        setError('Email atau password salah. Silakan coba lagi.');
+      } else {
+        setError(err.message || 'Gagal login. Cek kembali email dan password Anda.');
+      }
     } finally {
       setLoading(false);
     }
