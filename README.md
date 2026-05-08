@@ -37,9 +37,9 @@ Sistem ini didesain menjadi dua poros utama: Fungsionalitas yang telah dibangun 
 ### 🚀 Fitur Inti yang Telah Tersedia (Core Functional)
 
 1. **Role-Based Authentication (RBAC) System**
-   - Registrasi pengguna dengan spesifikasi tipe *Role* bawaan: `Guru` atau `Murid/Alumni`.
-   - Modul Login dan Register yang aman dengan validasi enkripsi di sisi server.
-   - Papan rute terproteksi (`/admin/dashboard`) yang memastikan hanya level otorisasi "Guru" yang berhak mengakses fungsi manajemen BKK.
+   - Registrasi publik dikhususkan untuk tipe *Role*: `Murid/Alumni`.
+   - **Invite-Only Admin System**: Pendaftaran akun `Guru/Admin BKK` tidak lagi dibuka untuk publik. Akun hanya dapat diciptakan (*Admin-Created*) via *backend/database* demi jaminan keamanan data tingkat instansi.
+   - Papan rute terproteksi (`/admin/dashboard`) yang memastikan hanya level otorisasi "admin" yang berhak mengakses fungsi manajemen BKK.
 
 2. **Dynamic Profile Control & Avatar System**
    - Halaman Profil pengguna ( `/profile` ) yang melacak *User ID* secara independen.
@@ -63,9 +63,9 @@ Sistem ini didesain menjadi dua poros utama: Fungsionalitas yang telah dibangun 
 
 ---
 
-### 🗺️ Peta Jalan Modul Lanjutan (15 Fitur NextGen)
+### 🗺️ Peta Jalan Modul Lanjutan (35 Fitur Ekosistem)
 
-Rancangan sistem ini diciptakan sangat modular agar ke depannya IT Developer dapat melanjutkan integrasi menuju 15 target fitur absolut berikut:
+Rancangan sistem ini diciptakan sangat modular berskala *Enterprise* agar ke depannya IT Developer dapat melanjutkan integrasi menuju 35 target fitur absolut berikut:
 
 **Module 1: Fitur Murid & Alumni (Talent Hub)**
 1. **AI CV Analysis** - Antarmuka (UI) cerdas penganalisis kelengkapan CV otomatis.
@@ -73,20 +73,38 @@ Rancangan sistem ini diciptakan sangat modular agar ke depannya IT Developer dap
 3. **Application Pipeline** - Visualisasi Kanban *board* berisi jalur pelacakan status lamaran pelamar (*Pending, Interview, Accepted*).
 4. **Portfolio Showcase** - Input pengumpul URL portofolio *open-source* pelamar *(Sudah Terbangun)*.
 5. **Digital QR Card** - Modul otomatis penghasil *QR Code* merujuk spesifik ke *public profile* murid.
-6. **Job Alerts** - Lencana cerdas *in-app notifications* jika lowongan baru terbit di ranah jurusan spesifik murid tersebut.
+6. **Job Alerts** - Lencana cerdas *in-app notifications* jika lowongan baru terbit.
+7. **AI Interview Simulator** - Latihan interview interaktif berbasis teks/suara dengan asisten AI.
+8. **Auto-Generate Surat Lamaran** - Generator Cover Letter otomatis berdasar deskripsi pekerjaan.
+9. **Skill Gap Analysis** - Analisis otomatis kekurangan *skill* murid untuk lowongan tertentu.
+10. **Portfolio Video** - Modul unggah video perkenalan diri (*Elevator Pitch*) durasi 60 detik.
+11. **Digital Certificate Vault** - Integrasi dan penyimpanan aman sertifikat BNSP/LSP.
+12. **Gaji Benchmark** - Informasi proyeksi gaji standar industri bagi lulusan SMK.
+13. **Sistem Mentorship** - Jembatan komunikasi alumni senior dengan adik kelas.
+14. **Job Bookmark** - Penyimpanan lowongan kerja favorit (*Wishlist*).
+15. **Dark Mode Schedule** - Pergantian mode gelap/terang otomatis mengikuti zona waktu.
+16. **Print CV to PDF** - Ekspor profil digital portal kerja menjadi berkas CV PDF berdesain profesional.
 
-**Module 2: Fitur Guru & Admin BKK (Moderation & Analytics)**
-7. **Verified Badge** - Lencana kontrol mutu eksklusif kelulusan siswa *(UI Sudah Terbangun)*.
-8. **Tracer Study Dashboard** - Diagram analitik visual interaktif berbasiskan *Chart.js/Recharts* perihal statistik sebaran keterserapan industri.
-9. **Job Blast** - Sistem notifikasi *Broadcast* prioritas lowongan.
-10. **Leaderboard** - Papan rekapitulasi data *ranking* program keahlian dengan tingkat kelulusan kerja absolut tertinggi.
-
-**Module 3: Fitur Industri & Advanced (Career Connect)**
-11. **Interview Scheduler** - Integrasi *Third-party Calendar API* menyinkronisasi ketersediaan tanggal rekruitmen.
-12. **Talent Search** - Parameter mesin pencarian kompleks (`query.param`) spesifik membedah kemampuan (skill) atau rata-rata IPK rapor.
-13. **Company Branding** - Fitur modifikasi UI mandiri laman perusahan/mitra demi meningkatkan daya tarik pelamar.
-14. **Theme Engine** - Fitur pergantian visual antarmuka Dark/Light *(Sudah Terbangun)*.
-15. **PWA Support** - Adaptasi spesifikasi instalasi aplikasi gawai mutakhir *(Sudah Terbangun)*.
+**Module 2 & 3: Fitur Moderasi, Guru, & Koneksi Industri**
+17. **Verified Badge** - Lencana kontrol mutu eksklusif kelulusan siswa *(UI Sudah Terbangun)*.
+18. **Tracer Study Dashboard** - Diagram analitik visual interaktif berbasiskan *Chart.js/Recharts*.
+19. **Job Blast** - Sistem notifikasi *Broadcast* prioritas lowongan.
+20. **Leaderboard** - Papan rekapitulasi data *ranking* program keahlian.
+21. **Interview Scheduler** - Integrasi *Third-party Calendar API* menyinkronisasi jadwal rekruitmen.
+22. **Talent Search** - Parameter mesin pencarian kompleks spesifik membedah kemampuan (skill).
+23. **Company Branding** - Modifikasi UI mandiri laman perusahaan.
+24. **Internal Messaging** - Fitur *real-time chat* antara perusahaan dan pelamar.
+25. **Status PKL Integration** - Rekam jejak instansi Praktik Kerja Lapangan (PKL) pada profil murid.
+26. **Broadcast Pengumuman** - Sistem notifikasi (*Pop-up*) tersentralisasi dari BKK untuk semua *user*.
+27. **Integrasi LinkedIn** - Sistem login dan pendaftaran kilat via opsi "Apply with LinkedIn".
+28. **Event Job Fair** - Portal mini untuk registrasi acara bursa kerja mandiri sekolah.
+29. **Verified Company Badge** - Lencana kepercayaan (*Trusted Partner*) untuk mitra industri resmi Wikrama.
+30. **Skill Endorsement** - Fitur bagi Guru pengajar untuk me-validasi (Endorse) keahlian teknis murid.
+31. **Auto-Matchmaking** - Algoritma rekomendasi otomatis lowongan yang cocok dengan profil murid.
+32. **Log Aktivitas** - Fitur pelacakan riwayat perusahaan yang mengunjungi profil murid.
+33. **Multi-Language Support** - Dukungan opsi antarmuka dwi-bahasa (Indonesia - Inggris).
+34. **Theme Engine** - Fitur pergantian visual antarmuka Dark/Light *(Sudah Terbangun)*.
+35. **PWA Support** - Adaptasi spesifikasi instalasi aplikasi gawai mutakhir *(Sudah Terbangun)*.
 
 ---
 

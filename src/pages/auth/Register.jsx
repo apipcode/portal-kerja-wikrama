@@ -105,20 +105,6 @@ const Register = () => {
                 onChange={handleChange}
                 minLength="6"
               />
-              
-              <div className="pt-2">
-                <label className="block text-sm font-medium text-slate-700 mb-2">Daftar Sebagai</label>
-                <div className="grid grid-cols-2 gap-4">
-                  <label className={`cursor-pointer border rounded-xl p-3 text-center transition-colors ${formData.role === 'murid' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-200 text-slate-500 hover:bg-slate-50'}`}>
-                    <input type="radio" name="role" value="murid" checked={formData.role === 'murid'} onChange={handleChange} className="hidden" />
-                    <span className="font-medium">Murid / Alumni</span>
-                  </label>
-                  <label className={`cursor-pointer border rounded-xl p-3 text-center transition-colors ${formData.role === 'guru' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-200 text-slate-500 hover:bg-slate-50'}`}>
-                    <input type="radio" name="role" value="guru" checked={formData.role === 'guru'} onChange={handleChange} className="hidden" />
-                    <span className="font-medium">Guru / BKK</span>
-                  </label>
-                </div>
-              </div>
             </div>
 
             <Button type="submit" className="w-full py-3" disabled={loading}>

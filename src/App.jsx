@@ -9,6 +9,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/admin/Dashboard';
+import JobDetail from './pages/JobDetail';
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requireRole }) => {
@@ -84,6 +85,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/jobs" element={<JobBoard />} />
+              <Route path="/jobs/:id" element={<JobDetail />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               
@@ -94,7 +96,7 @@ function App() {
               } />
               
               <Route path="/admin/dashboard" element={
-                <ProtectedRoute requireRole="guru">
+                <ProtectedRoute requireRole="admin">
                   <AdminDashboard />
                 </ProtectedRoute>
               } />
