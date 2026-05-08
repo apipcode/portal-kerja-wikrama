@@ -1,0 +1,21 @@
+{
+  "name": "Portal Kerja SMK Wikrama",
+  "short_name": "Wikrama Career",
+  "description": "Agent-First Career Hub SMK Wikrama Bogor",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e3a8a",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/vite.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
