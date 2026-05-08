@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Building2, MapPin, Clock, DollarSign, BookmarkPlus } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Badge from '../common/Badge';
 import Button from '../common/Button';
 
@@ -17,57 +17,58 @@ export const MOCK_JOBS = [
 
 const JURUSAN = ['Semua', 'PPLG', 'TJKT', 'DKV', 'PMN', 'KLN', 'HTL', 'MPLB'];
 
-const JobCard = ({ job }) => (
-  <motion.div 
-    variants={{
-      hidden: { opacity: 0, y: 20 },
-      show: { opacity: 1, y: 0 }
-    }}
-    className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-soft transition-all group"
-  >
-    <div className="flex justify-between items-start mb-4">
-      <div className="flex gap-4">
-        <img src={job.logo} alt={job.company} className="w-12 h-12 rounded-xl object-cover" />
-        <div>
-          <h3 className="font-semibold text-lg text-slate-800 dark:text-white group-hover:text-primary dark:group-hover:text-primary-light transition-colors">{job.title}</h3>
-          <div className="flex items-center text-slate-500 dark:text-slate-400 text-sm mt-1">
-            <Building2 className="w-4 h-4 mr-1" />
-            {job.company}
+const JobCard = ({ job }) => {
+  const navigate = useNavigate();
+  return (
+    <motion.div 
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0 }
+      }}
+      className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-soft transition-all group"
+    >
+      <div className="flex justify-between items-start mb-4">
+        <div className="flex gap-4">
+          <img src={job.logo} alt={job.company} className="w-12 h-12 rounded-xl object-cover" />
+          <div>
+            <h3 className="font-semibold text-lg text-slate-800 dark:text-white group-hover:text-primary dark:group-hover:text-primary-light transition-colors">{job.title}</h3>
+            <div className="flex items-center text-slate-500 dark:text-slate-400 text-sm mt-1">
+              <Building2 className="w-4 h-4 mr-1" />
+              {job.company}
+            </div>
           </div>
         </div>
+        <button className="text-slate-300 dark:text-slate-600 hover:text-primary transition-colors">
+          <BookmarkPlus className="w-5 h-5" />
+        </button>
       </div>
-      <button className="text-slate-300 dark:text-slate-600 hover:text-primary transition-colors">
-        <BookmarkPlus className="w-5 h-5" />
-      </button>
-    </div>
-    
-    <div className="grid grid-cols-2 gap-3 mb-5">
-      <div className="flex items-center text-sm text-slate-600 dark:text-slate-400">
-        <MapPin className="w-4 h-4 mr-2 text-slate-400" />
-        {job.location}
+      
+      <div className="grid grid-cols-2 gap-3 mb-5">
+        <div className="flex items-center text-sm text-slate-600 dark:text-slate-400">
+          <MapPin className="w-4 h-4 mr-2 text-slate-400" />
+          {job.location}
+        </div>
+        <div className="flex items-center text-sm text-slate-600 dark:text-slate-400">
+          <Clock className="w-4 h-4 mr-2 text-slate-400" />
+          {job.type}
+        </div>
+        <div className="flex items-center text-sm text-slate-600 dark:text-slate-400 col-span-2">
+          <DollarSign className="w-4 h-4 mr-2 text-slate-400" />
+          <span className="font-medium text-slate-700 dark:text-slate-300">{job.salary}</span>
+        </div>
       </div>
-      <div className="flex items-center text-sm text-slate-600 dark:text-slate-400">
-        <Clock className="w-4 h-4 mr-2 text-slate-400" />
-        {job.type}
+      
+      <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
+        <div className="flex flex-wrap gap-2">
+          {job.tags.slice(0, 2).map((tag, i) => (
+            <Badge key={i} variant={i === 2 ? "secondary" : "gray"}>{tag}</Badge>
+          ))}
+        </div>
+        <Button variant="outline" className="px-3 py-1.5 text-xs" onClick={() => navigate(`/jobs/${job.id}`)}>Lihat Detail</Button>
       </div>
-      <div className="flex items-center text-sm text-slate-600 dark:text-slate-400 col-span-2">
-        <DollarSign className="w-4 h-4 mr-2 text-slate-400" />
-        <span className="font-medium text-slate-700 dark:text-slate-300">{job.salary}</span>
-      </div>
-    </div>
-    
-    <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
-      <div className="flex flex-wrap gap-2">
-        {job.tags.slice(0, 2).map((tag, i) => (
-          <Badge key={i} variant={i === 2 ? "secondary" : "gray"}>{tag}</Badge>
-        ))}
-      </div>
-      <Link to={`/jobs/${job.id}`}>
-        <Button variant="outline" className="px-3 py-1.5 text-xs">Lihat Detail</Button>
-      </Link>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 const JobBoard = () => {
   const [activeFilter, setActiveFilter] = useState('Semua');
